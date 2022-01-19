@@ -1,4 +1,5 @@
-import { useState } from "react";
+// import { useState } from "react";
+import { useState, useCallback } from "react";
 import { ChildArea } from "./ChildArea";
 import "./styles.css";
 
@@ -14,7 +15,10 @@ export default function App() {
 
   const onChangeText = (e) => setText(e.target.value);
 
-  const onClickOpen = (e) => setOpen(!open);
+  const onClickOpen = () => setOpen(!open);
+
+  // const onClickClose = () => setOpen(false);
+  const onClickClose = useCallback(() => setOpen(false), [setOpen]);
 
   return (
     <div className="App">
@@ -29,7 +33,8 @@ export default function App() {
       {/* <button>表示</button> */}
       <button onClick={onClickOpen}>表示</button>
       {/* <ChildArea /> */}
-      <ChildArea open={open} />
+      {/* <ChildArea open={open} /> */}
+      <ChildArea open={open} onClickClose={onClickClose} />
     </div>
   );
 }
